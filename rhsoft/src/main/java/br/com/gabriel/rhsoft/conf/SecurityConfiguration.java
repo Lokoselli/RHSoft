@@ -11,20 +11,24 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.gabriel.rhsoft.daos.UsuarioDAO;
 
+
+
+
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
-
+    
     @Override
     @Profile("dev")
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        .antMatchers("/**").permitAll()
-        .anyRequest().authenticated()
-        .and().formLogin().loginPage("/login").permitAll()
-        .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+            .antMatchers("/**").permitAll()
+            .antMatchers("/resources/**").permitAll()
+            .anyRequest().authenticated()
+            .and().formLogin().loginPage("/login").permitAll()
+            .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
     }
 
     @Override
@@ -33,4 +37,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .passwordEncoder(new BCryptPasswordEncoder());
     }
 
+    
 }

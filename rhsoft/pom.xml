@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>br.com.gabriel.rhsoft</groupId>
     <artifactId>rhsoft</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
-    <name>rhsoft Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
-
     <build>
         <finalName>rhsoft</finalName>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.7.6</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.31.v20200723</version>
                 <configuration>
-                    <container>
-                        <containerId>tomcat9x</containerId>
-                        <type>embedded</type>
-                    </container>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/rhsoft</contextPath>
+                    </webApp>
                 </configuration>
             </plugin>
         </plugins>
@@ -38,6 +31,29 @@
             <version>42.2.16</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.4.31.v20200723</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
@@ -66,6 +82,27 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>2.0.1.Final</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -146,9 +183,6 @@
             <version>5.2.7.RELEASE</version>
         </dependency>
 
-
-        <!-- Spring Test-->
-
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -171,8 +205,6 @@
             <artifactId>spring-core</artifactId>
             <version>5.2.7.RELEASE</version>
         </dependency>
-
-        <!-- Security-->
 
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
         <dependency>
@@ -210,6 +242,15 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- Banco de Dados Dependencies -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.17</version>
+        </dependency>
+
         <!-- Hibernate Dependencies-->
 
         <dependency>
@@ -238,6 +279,7 @@
             <version>6.1.5.Final</version>
         </dependency>
 
+
         <!-- API, java.xml.bind module -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
@@ -252,142 +294,26 @@
             <version>2.3.2</version>
         </dependency>
 
-        <!-- JSP Dependences -->
+        <!-- Cache Caffeine -->
+
+        <!-- https://mvnrepository.com/artifact/com.github.ben-manes.caffeine/guava -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>guava</artifactId>
+            <version>2.8.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.2</version>
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!--Tomcat Dependencies-->
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-util</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-coyote</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-api</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jdbc</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-dbcp</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-servlet-api</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jsp-api</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jasper</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jasper-el</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-el-api</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-catalina</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-tribes</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-catalina-ha</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-annotations-api</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-juli</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-logging-juli</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-logging-log4j</artifactId>
-            <version>9.0.0.M1</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.codehaus.cargo/cargo-maven2-plugin -->
-        <dependency>
-            <groupId>org.codehaus.cargo</groupId>
-            <artifactId>cargo-maven2-plugin</artifactId>
-            <version>1.7.6</version>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+            <version>1.2.0</version>
         </dependency>
 
 
@@ -400,4 +326,6 @@
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+
 </project>

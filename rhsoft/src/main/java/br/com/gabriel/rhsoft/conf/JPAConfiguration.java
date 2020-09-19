@@ -12,25 +12,28 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableTransactionManagement
 public class JPAConfiguration {
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Properties props) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
         factoryBean.setJpaVendorAdapter(vendorAdapter);
         factoryBean.setDataSource(dataSource);
+
+        Properties props = aditionalProperties();
+
         factoryBean.setJpaProperties(props);
         factoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");
 
         return factoryBean;
     }
 
-    @Bean
-    @Profile("dev")
-    public Properties aditionalProperties() {
+    private Properties aditionalProperties() {
         Properties props = new Properties();
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         props.setProperty("hibernate.show_sql", "true");
@@ -43,11 +46,10 @@ public class JPAConfiguration {
     @Profile("dev")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUsername("root");
+        dataSource.setUsername("gitpod");
         dataSource.setPassword("");
-        dataSource.setUrl("jdbc:postgresql://localhost:3306/main");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/main");
+        dataSource.setDriverClassName("org.postgresql.Driver");
         return dataSource;
     }
 
@@ -55,7 +57,5 @@ public class JPAConfiguration {
     public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
-
-
 
 }
