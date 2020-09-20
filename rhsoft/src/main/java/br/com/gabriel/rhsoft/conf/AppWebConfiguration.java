@@ -31,13 +31,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.gabriel.rhsoft.controllers.HomeController;
 import br.com.gabriel.rhsoft.daos.UsuarioDAO;
+import br.com.gabriel.rhsoft.models.ExposedCompany;
 
 
 
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackageClasses = { HomeController.class, UsuarioDAO.class})
+@ComponentScan(basePackageClasses = { HomeController.class, UsuarioDAO.class, ExposedCompany.class})
 @EnableCaching
 public class AppWebConfiguration implements WebMvcConfigurer {
 
@@ -46,9 +47,7 @@ public class AppWebConfiguration implements WebMvcConfigurer {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
-
-        resolver.setExposedContextBeanNames("carrinhoCompras");
-
+        
         return resolver;
     }
 

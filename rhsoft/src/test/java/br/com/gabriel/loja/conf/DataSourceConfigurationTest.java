@@ -1,4 +1,4 @@
-package br.com.casadocodigo.loja.conf;
+package br.com.gabriel.loja.conf;
 
 import javax.sql.DataSource;
 
@@ -12,9 +12,9 @@ public class DataSourceConfigurationTest {
     @Profile("test")
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigo_teste");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUsername("root");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/test");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUsername("gitpod");
         dataSource.setPassword("");
         return dataSource;
     }
