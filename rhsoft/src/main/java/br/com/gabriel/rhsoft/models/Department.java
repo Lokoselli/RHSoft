@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Departments {
+public class Department {
     
     @Id
     private String name;
@@ -33,7 +33,7 @@ public class Departments {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Departments other = (Departments) obj;
+        Department other = (Department) obj;
         if (name == null) {
             if (other.name != null)
                 return false;
