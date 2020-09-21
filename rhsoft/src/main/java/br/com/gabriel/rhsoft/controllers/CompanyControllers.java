@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.gabriel.rhsoft.daos.CompanyDAO;
 import br.com.gabriel.rhsoft.models.Company;
-import br.com.gabriel.rhsoft.models.Department;
 import br.com.gabriel.rhsoft.models.ExposedCompany;
 
 @Controller
@@ -19,14 +18,14 @@ public class CompanyControllers {
 
     @Autowired
     private ExposedCompany exposedCompany;
-    
+
     @RequestMapping("/create12345")
-    public String createCompany(){
+    public String companyForm() {
         return "/company/companyForm";
     }
 
     @RequestMapping(method = RequestMethod.POST, name = "gravaEmpresa")
-    public String gravaEmpres(Company company){
+    public String createEmpres(Company company) {
 
         companyDAO.persistCompany(company);
         return "redirect:/";
@@ -34,20 +33,10 @@ public class CompanyControllers {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String setExposedCompany(Integer id){
+    public String setExposedCompany(Integer id) {
 
         Company selected = companyDAO.findCompanyById(id);
         exposedCompany.setCompany(selected);
-
-        return "redirect:/";
-    }
-
-    @RequestMapping("/addDepartment")
-    public String addDepartment(Department department){
-
-        exposedCompany.addDepartment(department);
-        System.out.println(exposedCompany.getCompany().getId());
-        companyDAO.updateCompany(exposedCompany.getCompany());
 
         return "redirect:/";
     }

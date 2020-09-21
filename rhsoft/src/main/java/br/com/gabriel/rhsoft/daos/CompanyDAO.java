@@ -15,19 +15,19 @@ public class CompanyDAO {
     @PersistenceContext
     private EntityManager manager;
 
-    public void persistCompany(Company company){
+    public void persistCompany(Company company) {
         manager.persist(company);
     }
 
-    public void updateCompany(Company company){
+    public void updateCompany(Company company) {
         manager.merge(company);
     }
 
     public Company findCompanyById(Integer id) {
-        Company company = manager.createQuery("select c from Company c where id=:id", Company.class).setParameter("id", id).getSingleResult();
+        Company company = manager.find(Company.class, id);
 
         return company;
 
     }
-    
+
 }

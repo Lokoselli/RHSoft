@@ -13,10 +13,6 @@ public class ExposedCompany {
 
     private Company company;
 
-    public void addDepartment(Department department){
-        this.company.addDepartment(department);
-    }
-
     public List<Department> getDepartments(){
         if(this.company == null){
             return new ArrayList<>();
@@ -39,4 +35,5 @@ public class ExposedCompany {
         }
         return this.company.toString();
     }
+
 }

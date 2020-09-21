@@ -15,8 +15,19 @@ public class DepartmentsDAO {
     @PersistenceContext
     private EntityManager manager;
 
-    public void persistDepartment(Department department){
+    public int persistDepartment(Department department){
         manager.persist(department);
+        return department.getId();
+    }
+
+    public Department findById(Integer id){
+        return manager.createQuery("select d from Department d where d.id=:id", Department.class).setParameter("id", id).getSingleResult();
+    }
+
+    public void deleteById(Integer id){
+        Department departmentToDelete = this.findById(id);
+
+        manager.remove(departmentToDelete);
     }
 
 }
