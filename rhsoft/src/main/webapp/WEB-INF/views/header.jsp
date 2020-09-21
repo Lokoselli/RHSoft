@@ -1,6 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
 
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,12 +28,8 @@
 						Login
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="?locale=en_US">
-						EN
-					</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="?locale=pt">PT</a></li>
+
+                <tags:localeList/>
 			</ul>
 		</div>
 	</nav>
