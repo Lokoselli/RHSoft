@@ -73,6 +73,16 @@ public class DepartmentsController {
         return("redirect:" + urlUpdateExposed());
     }
 
+    @RequestMapping(value = "/detail", name = "detailDepartment")
+    public ModelAndView detailDepartment(Integer id){
+        ModelAndView modelAndView = new ModelAndView("/departments/detail");
+        Department department = departmentsDAO.findById(id);
+
+        modelAndView.addObject("department", department);
+
+        return modelAndView;
+    }
+
     private String urlUpdateExposed(){
         return "/" + exposedCompany.getCompany().getId();
     }
