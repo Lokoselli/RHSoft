@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gabriel.rhsoft.daos.DepartmentsDAO;
 import br.com.gabriel.rhsoft.models.Department;
@@ -25,6 +26,17 @@ public class DepartmentsController {
         return "/departments/departmentsForm";
     }
 
+    @RequestMapping(value="/edit", name = "departmentEditForm", method = RequestMethod.POST)
+    public ModelAndView departmentEditForm(Integer id){
+        ModelAndView modelAndView = new ModelAndView("/departments/departmentsEditForm");
+
+        Department department = departmentsDAO.findById(id);
+        modelAndView.addObject("department", department);
+
+        return modelAndView;
+
+    }
+
     @RequestMapping(method = RequestMethod.POST, name = "createDepartment")
     public String createDepartment(Department department) {
 
@@ -37,7 +49,7 @@ public class DepartmentsController {
         department.setCompany(exposedCompany.getCompany());
         departmentsDAO.persistDepartment(department);
 
-        return "redirect:/company?id=" + exposedCompany.getCompany().getId();
+        return "redirect:" + urlUpdateExposed();
 
     }
 
@@ -50,7 +62,18 @@ public class DepartmentsController {
 
         departmentsDAO.deleteById(id);
 
-        return "redirect:/company?id=" + exposedCompany.getCompany().getId();
+        return "redirect:" + urlUpdateExposed();
     }
 
+    @RequestMapping(value = "/editDepartment", name = "editDepartment", method = RequestMethod.POST)
+    public String editDepartment(Department department) {
+        
+        departmentsDAO.editDepartment(department);
+
+        return("redirect:" + urlUpdateExposed());
+    }
+
+    private String urlUpdateExposed(){
+        return "/" + exposedCompany.getCompany().getId();
+    }
 }

@@ -4,9 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.gabriel.rhsoft.models.Department;
+import br.com.gabriel.rhsoft.models.ExposedCompany;
 
 @Repository
 @Transactional
@@ -15,9 +17,19 @@ public class DepartmentsDAO {
     @PersistenceContext
     private EntityManager manager;
 
+    @Autowired
+    ExposedCompany exposedCompany;
+
     public int persistDepartment(Department department){
         manager.persist(department);
         return department.getId();
+    }
+
+    public void editDepartment(Department department){
+
+        department.setCompany(exposedCompany.getCompany());
+
+        manager.merge(department);
     }
 
     public Department findById(Integer id){

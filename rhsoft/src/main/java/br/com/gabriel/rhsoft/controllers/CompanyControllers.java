@@ -2,6 +2,7 @@ package br.com.gabriel.rhsoft.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,7 +11,7 @@ import br.com.gabriel.rhsoft.models.Company;
 import br.com.gabriel.rhsoft.models.ExposedCompany;
 
 @Controller
-@RequestMapping("/company")
+@RequestMapping("/")
 public class CompanyControllers {
 
     @Autowired
@@ -32,8 +33,8 @@ public class CompanyControllers {
 
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String setExposedCompany(Integer id) {
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public String setExposedCompany(@PathVariable(name = "id") Integer id) {
 
         Company selected = companyDAO.findCompanyById(id);
         exposedCompany.setCompany(selected);
