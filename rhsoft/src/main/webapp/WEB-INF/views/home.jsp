@@ -68,13 +68,13 @@
 				<c:forEach items="${exposedCompany.departments}" var="department">
 					<tr>
 						<th scope="row" class="departmentColumn nonHoverable blockLink" style="vertical-align:middle">
-							<a href="#">${department.name}</a>
+							<a href="${s:mvcUrl('detailDepartment').arg(0, department.id).build()}">${department.name}</a>
 						</th>
 						<td class="workerCount nonHoverable blockLink" style="vertical-align:middle">
 							<a href="#">0</a>
 						</td>
 						<td class="otherColumn links">
-							<form:form servletRelativeAction="${s:mvcUrl('departmentEditForm').arg(0, department.id).build()}" method="post">
+							<form:form servletRelativeAction="${s:mvcUrl('detailDepartment').arg(0, department.id).build()}" method="post">
 								<input type="submit" value='<fmt:message key="buttons.edit"/>' class="btn btn-secondary">
                             </form:form>
 						</td>
