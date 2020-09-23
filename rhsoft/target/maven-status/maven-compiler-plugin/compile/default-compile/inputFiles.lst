@@ -8,11 +8,14 @@
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/JsonViewResolver.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/AppWebConfiguration.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/daos/CompanyDAO.java
+/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Worker.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/ExposedCompany.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Usuario.java
-/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/DepartmentsController.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/daos/DepartmentsDAO.java
+/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/DepartmentsController.java
+/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/WorkerController.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/SecurityConfiguration.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/LoginController.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/ServletSpringMVC.java
+/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/daos/WorkersDAO.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/JPAConfiguration.java
