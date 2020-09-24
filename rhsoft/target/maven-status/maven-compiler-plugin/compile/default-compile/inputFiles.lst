@@ -1,7 +1,7 @@
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Department.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Company.java
-/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/SpringSecurityFilterConfiguration.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/daos/UsuarioDAO.java
+/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/SpringSecurityFilterConfiguration.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Role.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/HomeController.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/CompanyControllers.java
@@ -10,8 +10,8 @@
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/daos/CompanyDAO.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Worker.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/ExposedCompany.java
-/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Usuario.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/daos/DepartmentsDAO.java
+/workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/models/Usuario.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/DepartmentsController.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/controllers/WorkerController.java
 /workspace/RHSoft/rhsoft/src/main/java/br/com/gabriel/rhsoft/conf/SecurityConfiguration.java

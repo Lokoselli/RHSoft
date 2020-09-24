@@ -50,19 +50,48 @@
 	.createButton {}
 </style>
 
+
 <tags:pageTemplate titulo="Home">
 	<section>
 
-		<form:form servletRelativeAction="#">
-			<c:forEach items="${workers}" var="worker">
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-                        Default checkbox
-                    </label>
-				</div>
-			</c:forEach>
+		<form:form servletRelativeAction="${s:mvcUrl('teste').build()}">
+			<table class="table table-striped table-dark table-hover">
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+				<c:forEach items="${workers}" var="worker">
+					<tr>
+						<td>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="${worker.id}" id="defaultCheck${worker.id}" name="selected">
+							</div>
+						</td>
+						<td>${worker.name}</td>
+						<td>${worker.email}</td>
+					</tr>
+
+
+				</c:forEach>
+			</table>
+            <input type="hidden" value="${departmentId}" name="departmentId"/>
+			<input type="submit" value="Adicionar"/>
 		</form:form>
 
 	</section>
 </tags:pageTemplate>
+<script>
+    function check(id){
+        console.log(id);
+        var checkbox = document.getElementById(id);
+        console.log(checkbox);
+        if(checkbox.checked){
+            checkbox = false;
+            checkbox.checked = false;
+        } else {
+            checkbox = true;
+            checkbox.checked = true;
+        }
+    }
+</script>

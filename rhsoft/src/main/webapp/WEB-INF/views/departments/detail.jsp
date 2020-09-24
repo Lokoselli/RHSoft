@@ -72,7 +72,7 @@
 			<tbody>
 				<tr class="table-dark">
 					<th class="createButton nonHoverable blockLink" colspan="4">
-						<a href="${s:mvcUrl('departmentForm').build()}">
+						<a href="${s:mvcUrl('addWorker').arg(0, department.id).build()}">
 							<fmt:message key="buttons.addNew" />
 							<fmt:message key="workers.worker" /> +
 						</a>

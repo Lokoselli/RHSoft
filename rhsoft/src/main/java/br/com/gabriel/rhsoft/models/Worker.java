@@ -31,6 +31,10 @@ public class Worker {
     private String personalId;
     private String email;
 
+    public void addDepartment(Department department) {
+        this.departments.add(department);
+    }
+
     public Integer getId() {
         return id;
     }
@@ -70,6 +74,8 @@ public class Worker {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    
 
     
 }

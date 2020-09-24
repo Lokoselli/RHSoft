@@ -86,4 +86,6 @@ public class DepartmentsController {
     private String urlUpdateExposed(){
         return "/" + exposedCompany.getCompany().getId();
     }
+
+
 }
