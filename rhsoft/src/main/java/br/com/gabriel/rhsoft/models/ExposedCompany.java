@@ -20,6 +20,10 @@ public class ExposedCompany {
         return this.company.getDepartments();
     }
 
+    public Integer getExposedId(){
+        return this.company.getId();
+    }
+
     public Company getCompany() {
         return company;
     }

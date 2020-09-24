@@ -27,6 +27,8 @@ public class Worker {
     )
     private Set<Department> departments = new HashSet<>();
 
+    private Integer companyId;
+
     private String name;
     private String personalId;
     private String email;
@@ -73,6 +75,14 @@ public class Worker {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
     
