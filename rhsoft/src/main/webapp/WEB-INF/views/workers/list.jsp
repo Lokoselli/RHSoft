@@ -81,17 +81,3 @@
 
 	</section>
 </tags:pageTemplate>
-<script>
-    function check(id){
-        console.log(id);
-        var checkbox = document.getElementById(id);
-        console.log(checkbox);
-        if(checkbox.checked){
-            checkbox = false;
-            checkbox.checked = false;
-        } else {
-            checkbox = true;
-            checkbox.checked = true;
-        }
-    }
-</script>
