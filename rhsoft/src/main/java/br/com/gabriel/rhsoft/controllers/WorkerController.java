@@ -32,6 +32,15 @@ public class WorkerController {
         return "/workers/workerForm";
     }
 
+    @RequestMapping(value = "/list", name = "listAllWorkers")
+    public ModelAndView listAllWorkers(){
+        ModelAndView modelAndView = new ModelAndView("/workers/detail");
+
+        modelAndView.addObject("workers", workersDAO.getAllWorkers());
+
+        return modelAndView;
+    }
+
     @RequestMapping(method = RequestMethod.POST, name = "createWorker")
     public String createWorker(Worker worker){
 
@@ -44,9 +53,16 @@ public class WorkerController {
         return "redirect:/" + exposedCompany.getCompany().getId();
     }
 
-    @RequestMapping(method = RequestMethod.GET, name = "addWorker", value = "list")
+    @RequestMapping(value = "/delete", name = "deleteWorker")
+    public String deleteWorker(Integer id){
+        workersDAO.delete(id);
+
+        return "redirect:/workers/list";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, name = "addWorker", value = "listToAdd")
     public ModelAndView addWorkerList(Integer departmentId){
-        ModelAndView modelAndView = new ModelAndView("/workers/list");
+        ModelAndView modelAndView = new ModelAndView("/workers/listToAdd");
 
         List<Worker> allWorkers = workersDAO.getAllWorkers();
         modelAndView.addObject("workers", allWorkers);

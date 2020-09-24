@@ -19,7 +19,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Link</a>
+					<a class="nav-link" href="${s:mvcUrl('listAllWorkers').build()}">Workers</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav navbar-right">

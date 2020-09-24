@@ -1,5 +1,6 @@
 package br.com.gabriel.rhsoft.daos;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,7 +31,7 @@ public class WorkersDAO {
 
     public List<Worker> getAllWorkers() {
 
-        return manager.createQuery("select w from Worker w where w.companyId=:companyId", Worker.class).setParameter("comanyId", exposedCompany.getExposedId()).getResultList();
+        return manager.createQuery("select w from Worker w where w.companyId=:companyId", Worker.class).setParameter("companyId", exposedCompany.getExposedId()).getResultList();
 
     }
 
@@ -43,6 +44,15 @@ public class WorkersDAO {
         Department department = manager.find(Department.class, departmentId);
         Worker selected = manager.find(Worker.class, workerId);
         selected.addDepartment(department);
+
+    }
+
+    public void delete(Integer id) {
+
+        Worker workerToDelete = manager.find(Worker.class, id);
+        workerToDelete.setDepartments(new HashSet<>());
+
+        manager.remove(workerToDelete);
 
     }
 

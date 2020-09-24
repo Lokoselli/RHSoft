@@ -56,7 +56,7 @@
 
 <tags:pageTemplate titulo="Home">
 	<section>
-        <h1>${department.name}</h1>
+        <h1>Worker List</h1>
 		<table class="table table-striped table-dark table-hover">
 			<thead>
 				<tr>
@@ -72,13 +72,13 @@
 			<tbody>
 				<tr class="table-dark">
 					<th class="createButton nonHoverable blockLink" colspan="4">
-						<a href="${s:mvcUrl('addWorker').arg(0, department.id).build()}">
+						<a href="${s:mvcUrl('workerForm').build()}">
 							<fmt:message key="buttons.addNew" />
 							<fmt:message key="workers.worker" /> +
 						</a>
 					</th>
 				</tr>
-				<c:forEach items="${department.workers}" var="worker">
+				<c:forEach items="${workers}" var="worker">
 					<tr>
 						<th scope="row" class="departmentColumn nonHoverable blockLink" style="vertical-align:middle">
 							<a href="#">${worker.name}</a>
@@ -87,8 +87,13 @@
 							<a href="#">${worker.email}</a>
 						</td>
 						<td class="otherColumn links">
-							<form:form servletRelativeAction="#" method="POST">
-								<input type="submit" value='Remove' class="btn btn-secondary">
+							<form:form servletRelativeAction="#" method="post">
+								<input type="submit" value='<fmt:message key="buttons.edit"/>' class="btn btn-secondary">
+                            </form:form>
+						</td>
+						<td class="otherColumn links">
+							<form:form servletRelativeAction="${s:mvcUrl('deleteWorker').arg(0, worker.id).build()}" method="POST">
+								<input type="submit" value='<fmt:message key="buttons.delete"/>' class="btn btn-secondary">
                             </form:form>
 						</td>
 					</tr>
