@@ -2,6 +2,8 @@ package br.com.gabriel.rhsoft.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +34,33 @@ public class WorkerController {
         return "/workers/workerForm";
     }
 
+    @RequestMapping(value = "/edit", name = "workerEditForm")
+    public ModelAndView workerEditForm(String previousPage,Integer id){
+        ModelAndView modelAndView = new ModelAndView("/workers/workerEditForm");
+
+        Worker worker = workersDAO.findById(id);
+        modelAndView.addObject("worker", worker);
+        modelAndView.addObject("previousPage", previousPage);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/update", name = "updateWorker", method = RequestMethod.POST)
+    public String updateWorker(Worker worker, String previousPage){
+
+        String redirectTo = previousPage.split(",/rhsoft")[1];
+
+        workersDAO.editWorker(worker);
+
+        return "redirect:" + redirectTo;
+    }
+
     @RequestMapping(value = "/list", name = "listAllWorkers")
-    public ModelAndView listAllWorkers(){
+    public ModelAndView listAllWorkers(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("/workers/detail");
 
         modelAndView.addObject("workers", workersDAO.getAllWorkers());
+        modelAndView.addObject("previousPage", request.getRequestURI());
 
         return modelAndView;
     }

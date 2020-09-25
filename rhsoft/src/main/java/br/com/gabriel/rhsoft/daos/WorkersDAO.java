@@ -56,4 +56,14 @@ public class WorkersDAO {
 
     }
 
+    public void editWorker(Worker worker) {
+        Worker persistedWorker = manager.find(Worker.class, worker.getId());
+
+        worker.setCompanyId(persistedWorker.getCompanyId());
+        worker.setDepartments(persistedWorker.getDepartments());
+
+        manager.merge(worker);
+
+    }
+
 }

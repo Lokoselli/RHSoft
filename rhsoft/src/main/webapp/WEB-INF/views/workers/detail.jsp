@@ -87,7 +87,7 @@
 							<a href="#">${worker.email}</a>
 						</td>
 						<td class="otherColumn links">
-							<form:form servletRelativeAction="#" method="post">
+							<form:form servletRelativeAction="${s:mvcUrl('workerEditForm').arg(0, previousPage).arg(1, worker.id).build()}" method="post">
 								<input type="submit" value='<fmt:message key="buttons.edit"/>' class="btn btn-secondary">
                             </form:form>
 						</td>
