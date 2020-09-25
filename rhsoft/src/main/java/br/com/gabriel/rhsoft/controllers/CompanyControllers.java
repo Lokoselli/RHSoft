@@ -26,7 +26,7 @@ public class CompanyControllers {
     }
 
     @RequestMapping(method = RequestMethod.POST, name = "gravaEmpresa")
-    public String createEmpres(Company company) {
+    public String createEmpresa(Company company) {
 
         companyDAO.persistCompany(company);
         return "redirect:/";

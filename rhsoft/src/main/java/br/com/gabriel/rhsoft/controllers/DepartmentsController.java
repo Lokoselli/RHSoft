@@ -21,6 +21,8 @@ public class DepartmentsController {
     @Autowired
     private ExposedCompany exposedCompany;
 
+    //#region Forms
+
     @RequestMapping(value = "/form", name = "departmentForm")
     public String departmentForm() {
         return "/departments/departmentsForm";
@@ -37,6 +39,9 @@ public class DepartmentsController {
 
     }
 
+    //#endregion
+
+    //#region CRUD
     @RequestMapping(method = RequestMethod.POST, name = "createDepartment")
     public String createDepartment(Department department) {
 
@@ -82,6 +87,8 @@ public class DepartmentsController {
 
         return modelAndView;
     }
+
+    //#endregion
 
     private String urlUpdateExposed(){
         return "/" + exposedCompany.getCompany().getId();

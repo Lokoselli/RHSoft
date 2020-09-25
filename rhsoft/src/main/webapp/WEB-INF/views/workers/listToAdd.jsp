@@ -53,9 +53,16 @@
 
 <tags:pageTemplate titulo="Home">
 	<section>
-
 		<form:form servletRelativeAction="${s:mvcUrl('teste').build()}">
 			<table class="table table-striped table-dark table-hover">
+                <tr class="table-dark">
+					<th class="createButton nonHoverable blockLink" colspan="4">
+						<a href="${s:mvcUrl('workerForm').arg(0, previousPage).build()}">
+							<fmt:message key="buttons.addNew" />
+							<fmt:message key="workers.worker" /> +
+						</a>
+					</th>
+				</tr>
                 <tr>
                     <th></th>
                     <th>Nome</th>
@@ -75,6 +82,7 @@
 
 				</c:forEach>
 			</table>
+            <input type = "hidden" value="${previousPage}" name="previousPage"/>
             <input type="hidden" value="${departmentId}" name="departmentId"/>
 			<input type="submit" value="Adicionar"/>
 		</form:form>

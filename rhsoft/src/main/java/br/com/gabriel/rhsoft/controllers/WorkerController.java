@@ -15,6 +15,10 @@ import br.com.gabriel.rhsoft.daos.DepartmentsDAO;
 import br.com.gabriel.rhsoft.daos.WorkersDAO;
 import br.com.gabriel.rhsoft.models.ExposedCompany;
 import br.com.gabriel.rhsoft.models.Worker;
+import br.com.gabriel.rhsoft.models.previouspages.ListToAdd;
+import br.com.gabriel.rhsoft.models.previouspages.PreviousPage;
+import br.com.gabriel.rhsoft.models.previouspages.PreviousPageInfo;
+import br.com.gabriel.rhsoft.models.previouspages.WorkerList;
 
 @Controller
 @RequestMapping("/workers")
@@ -24,14 +28,19 @@ public class WorkerController {
     ExposedCompany exposedCompany;
 
     @Autowired
+    PreviousPageInfo previousPageInfo;
+
+    @Autowired
     WorkersDAO workersDAO;
 
     @Autowired
     DepartmentsDAO departmentsDAO;
 
     @RequestMapping(value = "/form", name = "workerForm")
-    public String workerForm() {
-        return "/workers/workerForm";
+    public ModelAndView workerForm(PreviousPageInfo previousPage) {
+        ModelAndView modelAndView = new ModelAndView("/workers/workerForm");
+
+        return modelAndView;
     }
 
     @RequestMapping(value = "/edit", name = "workerEditForm")
@@ -59,6 +68,9 @@ public class WorkerController {
     public ModelAndView listAllWorkers(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("/workers/detail");
 
+        WorkerList workerList = new WorkerList(request.getRequestURI());
+        previousPageInfo.setPreviousPage(workerList);
+
         modelAndView.addObject("workers", workersDAO.getAllWorkers());
         modelAndView.addObject("previousPage", request.getRequestURI());
 
@@ -68,13 +80,11 @@ public class WorkerController {
     @RequestMapping(method = RequestMethod.POST, name = "createWorker")
     public String createWorker(Worker worker){
 
-        if(exposedCompany.getCompany() == null){
-            return "redirect:/";
-        }
-
         workersDAO.persistWorker(worker);
+    
+        PreviousPage previousPage = previousPageInfo.getPreviousPageAndNull();
         
-        return "redirect:/" + exposedCompany.getCompany().getId();
+        return "redirect:" + previousPage.getPath();
     }
 
     @RequestMapping(value = "/delete", name = "deleteWorker")
@@ -85,10 +95,13 @@ public class WorkerController {
     }
 
     @RequestMapping(method = RequestMethod.GET, name = "addWorker", value = "listToAdd")
-    public ModelAndView addWorkerList(Integer departmentId){
+    public ModelAndView addWorkerList(Integer departmentId, HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView("/workers/listToAdd");
 
         List<Worker> allWorkers = workersDAO.getAllWorkers();
+        ListToAdd lToAdd= new ListToAdd(request.getRequestURI(), departmentId);
+        previousPageInfo.setPreviousPage(lToAdd);
+
         modelAndView.addObject("workers", allWorkers);
         modelAndView.addObject("departmentId", departmentId);
 

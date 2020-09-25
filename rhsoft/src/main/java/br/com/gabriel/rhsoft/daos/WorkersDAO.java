@@ -50,7 +50,7 @@ public class WorkersDAO {
     public void delete(Integer id) {
 
         Worker workerToDelete = manager.find(Worker.class, id);
-        workerToDelete.setDepartments(new HashSet<>());
+        workerToDelete.nullDeparments();
 
         manager.remove(workerToDelete);
 

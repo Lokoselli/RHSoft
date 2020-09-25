@@ -74,7 +74,7 @@
 							<a href="#">0</a>
 						</td>
 						<td class="otherColumn links">
-							<form:form servletRelativeAction="${s:mvcUrl('detailDepartment').arg(0, department.id).build()}" method="post">
+							<form:form servletRelativeAction="${s:mvcUrl('departmentEditForm').arg(0, department.id).build()}" method="post">
 								<input type="submit" value='<fmt:message key="buttons.edit"/>' class="btn btn-secondary">
                             </form:form>
 						</td>

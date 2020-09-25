@@ -6,6 +6,7 @@
 
 <tags:pageTemplate titulo="Create Worker">
 	<section>
+        <h1>${previousPage.path}</h1>
 		<form:form servletRelativeAction="${s:mvcUrl('createWorker').build()}" method="POST">
 			<div class="form-group">
 				<label for="companyName"><fmt:message key="workers.label.name"/></label>
@@ -17,6 +18,7 @@
                 <label for="companyName"><fmt:message key="workers.label.email"/></label>
 				<input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" name="email">
 			</div>
+            <input type="hidden" value="${previousPage}" name="previousPage"/>
 			<input type="submit" value="SUBMIT" class="btn btn-dark">
         </form:form>
 	</section>

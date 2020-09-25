@@ -33,6 +33,10 @@ public class Worker {
     private String personalId;
     private String email;
 
+    public void nullDeparments(){
+        this.departments = null;
+    }
+
     public void addDepartment(Department department) {
         this.departments.add(department);
     }
