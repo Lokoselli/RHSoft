@@ -95,7 +95,7 @@ public class WorkerController {
         return modelAndView;
     }
 
-    @RequestMapping(name = "teste", value = "/teste")
+    @RequestMapping(name = "teste", value = "/addDep")
     public String addDepartment(@RequestParam(value = "selected") Integer[] selected, @RequestParam(value = "departmentId") String departmentId){
         departmentId = departmentId.replace(",", "");
         
@@ -103,11 +103,18 @@ public class WorkerController {
             if(workerId == null){
                 continue;
             }else{
-                System.out.println(workerId);
                 workersDAO.addDepartment(workerId, Integer.parseInt(departmentId));   
             }           
         }
         return "redirect:/departments/detail?id=" + departmentId ;
+    }
+
+    @RequestMapping(name = "workerRemoveDepartment", value = "/removeDep")
+    public String removeDepartment(Integer workerId, Integer departmentId){
+
+        workersDAO.removeDepartment(workerId, departmentId);
+
+        return "redirect:/departments/detail?id=" + departmentId;
     }
     
 }

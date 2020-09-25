@@ -66,4 +66,13 @@ public class WorkersDAO {
 
     }
 
+    public void removeDepartment(Integer workerId, Integer departmentId) {
+
+        Worker worker = manager.find(Worker.class, workerId);
+        Department department = manager.find(Department.class, departmentId);
+
+        worker.removeDeparment(department);
+
+    }
+
 }

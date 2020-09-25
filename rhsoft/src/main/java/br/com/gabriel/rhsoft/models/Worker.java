@@ -37,6 +37,10 @@ public class Worker {
         this.departments.add(department);
     }
 
+    public void removeDeparment(Department department){
+        this.departments.remove(department);
+    }
+
     public Integer getId() {
         return id;
     }
