@@ -1,4 +1,4 @@
-package br.com.gabriel.loja.conf;
+package br.com.gabriel.rhsoft.conf;
 
 import javax.sql.DataSource;
 

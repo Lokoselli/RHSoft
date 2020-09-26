@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CompanyDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rhsoft</a> &gt; <a href="index.source.html" class="el_package">br.com.gabriel.rhsoft.daos</a> &gt; <span class="el_source">CompanyDAO.java</span></div><h1>CompanyDAO.java</h1><pre class="source lang-java linenums">package br.com.gabriel.rhsoft.daos;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.com.gabriel.rhsoft.models.Company;
+
+@Repository
+@Transactional
+<span class="fc" id="L13">public class CompanyDAO {</span>
+
+    @PersistenceContext
+    private EntityManager manager;
+
+    public void persistCompany(Company company) {
+<span class="nc" id="L19">        manager.persist(company);</span>
+<span class="nc" id="L20">    }</span>
+
+    public void updateCompany(Company company) {
+<span class="nc" id="L23">        manager.merge(company);</span>
+<span class="nc" id="L24">    }</span>
+
+    public Company findCompanyById(Integer id) {
+<span class="nc" id="L27">        Company company = manager.find(Company.class, id);</span>
+
+<span class="nc" id="L29">        return company;</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

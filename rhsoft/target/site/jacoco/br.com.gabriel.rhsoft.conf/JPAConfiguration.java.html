@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JPAConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">rhsoft</a> &gt; <a href="index.source.html" class="el_package">br.com.gabriel.rhsoft.conf</a> &gt; <span class="el_source">JPAConfiguration.java</span></div><h1>JPAConfiguration.java</h1><pre class="source lang-java linenums">package br.com.gabriel.rhsoft.conf;
+
+import java.util.Properties;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+@EnableTransactionManagement
+<span class="fc" id="L18">public class JPAConfiguration {</span>
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+<span class="fc" id="L22">        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();</span>
+<span class="fc" id="L23">        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();</span>
+
+<span class="fc" id="L25">        factoryBean.setJpaVendorAdapter(vendorAdapter);</span>
+<span class="fc" id="L26">        factoryBean.setDataSource(dataSource);</span>
+
+<span class="fc" id="L28">        Properties props = aditionalProperties();</span>
+
+<span class="fc" id="L30">        factoryBean.setJpaProperties(props);</span>
+<span class="fc" id="L31">        factoryBean.setPackagesToScan(&quot;br.com.gabriel.rhsoft.models&quot;);</span>
+
+<span class="fc" id="L33">        return factoryBean;</span>
+    }
+
+    private Properties aditionalProperties() {
+<span class="fc" id="L37">        Properties props = new Properties();</span>
+<span class="fc" id="L38">        props.setProperty(&quot;hibernate.dialect&quot;, &quot;org.hibernate.dialect.PostgreSQLDialect&quot;);</span>
+<span class="fc" id="L39">        props.setProperty(&quot;hibernate.show_sql&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L40">        props.setProperty(&quot;hibernate.hbm2ddl.auto&quot;, &quot;update&quot;);</span>
+
+<span class="fc" id="L42">        return props;</span>
+    }
+
+    @Bean
+    @Profile(&quot;dev&quot;)
+    public DataSource dataSource() {
+<span class="nc" id="L48">        DriverManagerDataSource dataSource = new DriverManagerDataSource();</span>
+<span class="nc" id="L49">        dataSource.setUsername(&quot;gitpod&quot;);</span>
+<span class="nc" id="L50">        dataSource.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L51">        dataSource.setUrl(&quot;jdbc:postgresql://localhost:5432/main&quot;);</span>
+<span class="nc" id="L52">        dataSource.setDriverClassName(&quot;org.postgresql.Driver&quot;);</span>
+<span class="nc" id="L53">        return dataSource;</span>
+    }
+
+    @Bean
+    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+<span class="fc" id="L58">        return new JpaTransactionManager(emf);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

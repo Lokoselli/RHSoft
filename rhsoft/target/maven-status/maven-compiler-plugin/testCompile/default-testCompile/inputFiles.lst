@@ -1,2 +1,3 @@
-/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/loja/conf/DataSourceConfigurationTest.java
-/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/loja/controllers/HomeControllerTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/controllers/HomeControllerTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/controllers/ControllerTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/conf/DataSourceConfigurationTest.java

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="br.com.gabriel.loja.controllers.HomeControllerTest" time="0.15" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="br.com.gabriel.rhsoft.controllers.HomeControllerTest" time="0.175" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.6+10-LTS"/>
@@ -61,5 +61,5 @@
     <property name="java.vendor.version" value="Zulu11.37+19-CA"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="br.com.gabriel.loja.controllers.HomeControllerTest" name="returnToHome" time="0.15"/>
+  <testcase classname="br.com.gabriel.rhsoft.controllers.HomeControllerTest" name="returnToHome" time="0.175"/>
 </testsuite>

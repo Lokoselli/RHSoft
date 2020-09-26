@@ -1,6 +1,5 @@
 package br.com.gabriel.rhsoft.daos;
 
-import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
