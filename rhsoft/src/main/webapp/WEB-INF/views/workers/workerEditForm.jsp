@@ -19,7 +19,7 @@
 			</div>
             <input type="hidden" name="id" value="${worker.id}"/>
             <input type="hidden" name="previousPage" value="${previousPage}"/>
-			<input type="submit" value="SUBMIT" class="btn btn-dark">
+			<input type="submit" value="<fmt:message key='buttons.submit'/>" class="btn btn-dark">
         </form:form>
 	</section>
 </tags:pageTemplate>

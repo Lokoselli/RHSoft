@@ -19,7 +19,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="${s:mvcUrl('listAllWorkers').build()}">Workers</a>
+					<a class="nav-link" href="${s:mvcUrl('listAllWorkers').build()}"><fmt:message key='navegacao.categoria.workers'/></a>
 				</li>
 			</ul>
 			<ul class="navbar-nav navbar-right">
