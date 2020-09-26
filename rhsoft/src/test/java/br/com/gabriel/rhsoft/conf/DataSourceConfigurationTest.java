@@ -1,5 +1,7 @@
 package br.com.gabriel.rhsoft.conf;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,17 @@ public class DataSourceConfigurationTest {
         dataSource.setUsername("gitpod");
         dataSource.setPassword("");
         return dataSource;
+    }
+
+    @Bean
+    @Profile("test")
+    public Properties aditionalProperties() {
+        Properties props = new Properties();
+        props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        props.setProperty("hibernate.show_sql", "false");
+        props.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+
+        return props;
     }
 
 }

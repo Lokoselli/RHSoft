@@ -7,14 +7,16 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 public class ControllerTest {
-    
+
     @Autowired
     protected WebApplicationContext wac;
 
     protected MockMvc mockMvc;
 
+    protected String webInfPath = "/WEB-INF/views/";
+
     @Before
-    public void setup(){
+    public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 }

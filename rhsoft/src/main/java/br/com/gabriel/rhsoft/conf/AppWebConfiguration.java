@@ -36,6 +36,7 @@ import br.com.gabriel.rhsoft.models.ExposedCompany;
 
 
 
+
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackageClasses = { HomeController.class, UsuarioDAO.class, ExposedCompany.class})

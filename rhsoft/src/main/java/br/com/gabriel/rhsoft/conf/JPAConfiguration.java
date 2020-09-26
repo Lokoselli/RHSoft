@@ -18,22 +18,22 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfiguration {
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Properties aditionalProperties) {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
         factoryBean.setJpaVendorAdapter(vendorAdapter);
         factoryBean.setDataSource(dataSource);
 
-        Properties props = aditionalProperties();
-
-        factoryBean.setJpaProperties(props);
+        factoryBean.setJpaProperties(aditionalProperties);
         factoryBean.setPackagesToScan("br.com.gabriel.rhsoft.models");
 
         return factoryBean;
     }
 
-    private Properties aditionalProperties() {
+    @Bean
+    @Profile("dev")
+    public Properties aditionalProperties() {
         Properties props = new Properties();
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         props.setProperty("hibernate.show_sql", "true");

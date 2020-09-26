@@ -22,7 +22,7 @@ public class CompanyControllers {
 
     @RequestMapping("/create12345")
     public String companyForm() {
-        return "/company/companyForm";
+        return "company/companyForm";
     }
 
     @RequestMapping(method = RequestMethod.POST, name = "gravaEmpresa")
