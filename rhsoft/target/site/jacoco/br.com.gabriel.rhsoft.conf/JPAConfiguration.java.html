@@ -18,28 +18,28 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 <span class="fc" id="L18">public class JPAConfiguration {</span>
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Properties aditionalProperties) {
 <span class="fc" id="L22">        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();</span>
 <span class="fc" id="L23">        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();</span>
 
 <span class="fc" id="L25">        factoryBean.setJpaVendorAdapter(vendorAdapter);</span>
 <span class="fc" id="L26">        factoryBean.setDataSource(dataSource);</span>
 
-<span class="fc" id="L28">        Properties props = aditionalProperties();</span>
+<span class="fc" id="L28">        factoryBean.setJpaProperties(aditionalProperties);</span>
+<span class="fc" id="L29">        factoryBean.setPackagesToScan(&quot;br.com.gabriel.rhsoft.models&quot;);</span>
 
-<span class="fc" id="L30">        factoryBean.setJpaProperties(props);</span>
-<span class="fc" id="L31">        factoryBean.setPackagesToScan(&quot;br.com.gabriel.rhsoft.models&quot;);</span>
-
-<span class="fc" id="L33">        return factoryBean;</span>
+<span class="fc" id="L31">        return factoryBean;</span>
     }
 
-    private Properties aditionalProperties() {
-<span class="fc" id="L37">        Properties props = new Properties();</span>
-<span class="fc" id="L38">        props.setProperty(&quot;hibernate.dialect&quot;, &quot;org.hibernate.dialect.PostgreSQLDialect&quot;);</span>
-<span class="fc" id="L39">        props.setProperty(&quot;hibernate.show_sql&quot;, &quot;true&quot;);</span>
-<span class="fc" id="L40">        props.setProperty(&quot;hibernate.hbm2ddl.auto&quot;, &quot;update&quot;);</span>
+    @Bean
+    @Profile(&quot;dev&quot;)
+    public Properties aditionalProperties() {
+<span class="nc" id="L37">        Properties props = new Properties();</span>
+<span class="nc" id="L38">        props.setProperty(&quot;hibernate.dialect&quot;, &quot;org.hibernate.dialect.PostgreSQLDialect&quot;);</span>
+<span class="nc" id="L39">        props.setProperty(&quot;hibernate.show_sql&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L40">        props.setProperty(&quot;hibernate.hbm2ddl.auto&quot;, &quot;update&quot;);</span>
 
-<span class="fc" id="L42">        return props;</span>
+<span class="nc" id="L42">        return props;</span>
     }
 
     @Bean

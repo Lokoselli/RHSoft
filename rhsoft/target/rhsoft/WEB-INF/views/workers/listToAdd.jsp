@@ -65,8 +65,8 @@
 				</tr>
                 <tr>
                     <th></th>
-                    <th>Nome</th>
-                    <th>Email</th>
+                    <th><fmt:message key='workers.label.nome'></th>
+                    <th><fmt:message key='workers.label.email'></th>
                 </tr>
 				<c:forEach items="${workers}" var="worker">
 					<tr>
@@ -84,7 +84,7 @@
 			</table>
             <input type = "hidden" value="${previousPage}" name="previousPage"/>
             <input type="hidden" value="${departmentId}" name="departmentId"/>
-			<input type="submit" value="Adicionar"/>
+			<input type="submit" value="<fmt:message key='buttons.addSelected'/>"/>
 		</form:form>
 
 	</section>

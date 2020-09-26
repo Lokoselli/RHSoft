@@ -25,19 +25,19 @@ import org.springframework.web.context.WebApplicationContext;
     }
 
     public Company getCompany() {
-<span class="nc" id="L28">        return company;</span>
+<span class="fc" id="L28">        return company;</span>
     }
 
     public void setCompany(Company company) {
-<span class="nc" id="L32">        this.company = company;</span>
-<span class="nc" id="L33">    }</span>
+<span class="fc" id="L32">        this.company = company;</span>
+<span class="fc" id="L33">    }</span>
     
     @Override
     public String toString() {
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if(this.company == null){</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if(this.company == null){</span>
 <span class="nc" id="L38">            return &quot;RHSoft&quot;;</span>
         }
-<span class="nc" id="L40">        return this.company.toString();</span>
+<span class="fc" id="L40">        return this.company.toString();</span>
     }
 
 }

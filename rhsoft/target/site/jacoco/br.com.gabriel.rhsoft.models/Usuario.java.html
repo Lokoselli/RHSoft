@@ -22,8 +22,8 @@ import org.springframework.security.core.userdetails.UserDetails;
     private String senha;
     
 
-    @OneToMany(fetch = FetchType.EAGER)
-<span class="nc" id="L26">    private List&lt;Role&gt; roles = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L25">    @OneToMany(fetch = FetchType.EAGER)</span>
+    private List&lt;Role&gt; roles = new ArrayList&lt;&gt;();
 
     public String getEmail(){
 <span class="nc" id="L29">        return this.email;</span>

@@ -16,17 +16,17 @@ import br.com.gabriel.rhsoft.models.Company;
     private EntityManager manager;
 
     public void persistCompany(Company company) {
-<span class="nc" id="L19">        manager.persist(company);</span>
-<span class="nc" id="L20">    }</span>
+<span class="fc" id="L19">        manager.persist(company);</span>
+<span class="fc" id="L20">    }</span>
 
     public void updateCompany(Company company) {
 <span class="nc" id="L23">        manager.merge(company);</span>
 <span class="nc" id="L24">    }</span>
 
     public Company findCompanyById(Integer id) {
-<span class="nc" id="L27">        Company company = manager.find(Company.class, id);</span>
+<span class="fc" id="L27">        Company company = manager.find(Company.class, id);</span>
 
-<span class="nc" id="L29">        return company;</span>
+<span class="fc" id="L29">        return company;</span>
 
     }
 

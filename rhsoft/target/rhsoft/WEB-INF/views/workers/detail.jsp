@@ -56,7 +56,7 @@
 
 <tags:pageTemplate titulo="Home">
 	<section>
-        <h1>Worker List</h1>
+        <h1><fmt:message key='workers.title'/></h1>
 		<table class="table table-striped table-dark table-hover">
 			<thead>
 				<tr>

@@ -19,13 +19,13 @@ import javax.persistence.ManyToMany;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+<span class="fc" id="L22">    @ManyToMany(cascade = { CascadeType.ALL })</span>
     @JoinTable(
         name = &quot;Worker_Department&quot;, 
         joinColumns = { @JoinColumn(name = &quot;worker_id&quot;) }, 
         inverseJoinColumns = { @JoinColumn(name = &quot;department_id&quot;) }
     )
-<span class="fc" id="L28">    private Set&lt;Department&gt; departments = new HashSet&lt;&gt;();</span>
+    private Set&lt;Department&gt; departments = new HashSet&lt;&gt;();
 
     private Integer companyId;
 

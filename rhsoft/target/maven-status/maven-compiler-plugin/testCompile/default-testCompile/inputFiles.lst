@@ -1,3 +1,6 @@
-/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/controllers/HomeControllerTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/builders/CompanyBuilder.java
 /workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/controllers/ControllerTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/controllers/HomeControllerTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/testing_daos/CompanyDAOForTesting.java
 /workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/conf/DataSourceConfigurationTest.java
+/workspace/RHSoft/rhsoft/src/test/java/br/com/gabriel/rhsoft/controllers/CompanyControllersTest.java

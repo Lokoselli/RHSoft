@@ -22,24 +22,24 @@ import br.com.gabriel.rhsoft.models.ExposedCompany;
 
     @RequestMapping(&quot;/create12345&quot;)
     public String companyForm() {
-<span class="nc" id="L25">        return &quot;/company/companyForm&quot;;</span>
+<span class="fc" id="L25">        return &quot;company/companyForm&quot;;</span>
     }
 
     @RequestMapping(method = RequestMethod.POST, name = &quot;gravaEmpresa&quot;)
     public String createEmpresa(Company company) {
 
-<span class="nc" id="L31">        companyDAO.persistCompany(company);</span>
-<span class="nc" id="L32">        return &quot;redirect:/&quot;;</span>
+<span class="fc" id="L31">        companyDAO.persistCompany(company);</span>
+<span class="fc" id="L32">        return &quot;redirect:/&quot;;</span>
 
     }
 
     @RequestMapping(method = RequestMethod.GET, value = &quot;/{id}&quot;)
     public String setExposedCompany(@PathVariable(name = &quot;id&quot;) Integer id) {
 
-<span class="nc" id="L39">        Company selected = companyDAO.findCompanyById(id);</span>
-<span class="nc" id="L40">        exposedCompany.setCompany(selected);</span>
+<span class="fc" id="L39">        Company selected = companyDAO.findCompanyById(id);</span>
+<span class="fc" id="L40">        exposedCompany.setCompany(selected);</span>
 
-<span class="nc" id="L42">        return &quot;redirect:/&quot;;</span>
+<span class="fc" id="L42">        return &quot;redirect:/&quot;;</span>
     }
 
 }
