@@ -1,16 +1,16 @@
 package br.com.gabriel.rhsoft.daos;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import br.com.gabriel.rhsoft.models.Company;
 import br.com.gabriel.rhsoft.models.Department;
-import br.com.gabriel.rhsoft.models.ExposedCompany;
 import br.com.gabriel.rhsoft.models.Worker;
 
 @Repository
@@ -20,17 +20,14 @@ public class WorkersDAO {
     @PersistenceContext
     private EntityManager manager;
 
-    @Autowired
-    ExposedCompany exposedCompany;
-
-    public void persistWorker(Worker worker) {
-        worker.setCompanyId(exposedCompany.getExposedId());
+    public void persistWorker(Worker worker, Company exposedCompany) {
+        worker.setCompanyId(exposedCompany.getId());
         manager.persist(worker);
     }
 
-    public List<Worker> getAllWorkers() {
+    public List<Worker> getAllWorkers(Company exposedCompany) {
 
-        return manager.createQuery("select w from Worker w where w.companyId=:companyId", Worker.class).setParameter("companyId", exposedCompany.getExposedId()).getResultList();
+        return manager.createQuery("select w from Worker w where w.companyId=:companyId", Worker.class).setParameter("companyId", exposedCompany.getId()).getResultList();
 
     }
 
@@ -49,8 +46,12 @@ public class WorkersDAO {
     public void delete(Integer id) {
 
         Worker workerToDelete = manager.find(Worker.class, id);
+        Set<Department> departments = workerToDelete.getDepartments();
+        for (Department department : departments) {
+            department.removeWorker(workerToDelete);            
+        }
         workerToDelete.nullDeparments();
-
+        
         manager.remove(workerToDelete);
 
     }

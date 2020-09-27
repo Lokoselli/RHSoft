@@ -3,12 +3,9 @@ package br.com.gabriel.rhsoft.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_APPLICATION)
 public class ExposedCompany {
 
     private Company company;

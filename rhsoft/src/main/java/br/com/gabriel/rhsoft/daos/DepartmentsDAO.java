@@ -1,14 +1,16 @@
 package br.com.gabriel.rhsoft.daos;
 
+import java.util.HashSet;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import br.com.gabriel.rhsoft.models.Company;
 import br.com.gabriel.rhsoft.models.Department;
-import br.com.gabriel.rhsoft.models.ExposedCompany;
+import br.com.gabriel.rhsoft.models.Worker;
 
 @Repository
 @Transactional
@@ -17,17 +19,14 @@ public class DepartmentsDAO {
     @PersistenceContext
     private EntityManager manager;
 
-    @Autowired
-    ExposedCompany exposedCompany;
-
     public int persistDepartment(Department department){
         manager.persist(department);
         return department.getId();
     }
 
-    public void editDepartment(Department department){
+    public void editDepartment(Department department, Company exposedCompany){
 
-        department.setCompany(exposedCompany.getCompany());
+        department.setCompany(exposedCompany);
 
         manager.merge(department);
     }
@@ -37,9 +36,25 @@ public class DepartmentsDAO {
     }
 
     public void deleteById(Integer id){
-        Department departmentToDelete = this.findById(id);
+        Department departmentToDelete = manager.find(Department.class, id);
+        departmentToDelete.setWorkers(new HashSet<>());
+        
+    }
 
-        manager.remove(departmentToDelete);
+    public void addWorker(Integer workerId, Integer departmentId) {
+
+        Worker workerToAdd = manager.find(Worker.class, workerId);
+        Department department = manager.find(Department.class, departmentId);
+
+        department.addWorker(workerToAdd);
+
+    }
+
+    public void removeDepartment(Integer workerId, Integer departmentId) {
+        Worker workerToRemove = manager.find(Worker.class, workerId);
+        Department department = manager.find(Department.class, departmentId);
+
+        department.removeWorker(workerToRemove);
     }
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -23,10 +24,19 @@ public class Department {
     @JoinColumn(name = "companyId")
     Company company;
 
-    @ManyToMany(mappedBy = "departments", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+       @JoinTable(
+        name = "Worker_Department", 
+        joinColumns = { @JoinColumn(name = "worker_id") }, 
+        inverseJoinColumns = { @JoinColumn(name = "department_id") }
+    )
     Set<Worker> workers = new HashSet<>();
 
     private String name;
+
+    public void addWorker(Worker workerToAdd) {
+        this.workers.add(workerToAdd);
+    }
 
     public Integer getId() {
         return id;
@@ -91,5 +101,11 @@ public class Department {
     public void setWorkers(Set<Worker> workers) {
         this.workers = workers;
     }
+
+    public void removeWorker(Worker workerToRemove) {
+        this.workers.remove(workerToRemove);
+    }
+
+   
 
 }
