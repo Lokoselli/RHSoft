@@ -19,7 +19,7 @@
 				<input type="text" class="form-control" id="companyName" aria-describedby="emailHelp" name="email">
 			</div>
             <input type="hidden" value="${previousPage}" name="previousPage"/>
-			<input type="submit" value="<fmt:message key='buttons.submit'>" class="btn btn-dark">
+			<input type="submit" value="<fmt:message key='buttons.submit'/>" class="btn btn-dark">
         </form:form>
 	</section>
 </tags:pageTemplate>

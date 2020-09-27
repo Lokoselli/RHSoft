@@ -87,8 +87,8 @@
 							<a href="#">${worker.email}</a>
 						</td>
 						<td class="otherColumn links">
-							<form:form servletRelativeAction="${s:mvcUrl('workerRemoveDepartment').arg(0,worker.id).arg(1,department.id).build()}" method="POST">
-								<input type="submit" value="<fmt:message key='buttons.remove'>" class="btn btn-secondary">
+							<form:form servletRelativeAction="${s:mvcUrl('departmentRemoveWorker').arg(0,worker.id).arg(1,department.id).build()}" method="POST">
+								<input type="submit" value="<fmt:message key='buttons.remove'/>" class="btn btn-secondary"/>
                             </form:form>
 						</td>
 					</tr>

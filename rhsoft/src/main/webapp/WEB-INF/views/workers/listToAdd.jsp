@@ -53,7 +53,7 @@
 
 <tags:pageTemplate titulo="Home">
 	<section>
-		<form:form servletRelativeAction="${s:mvcUrl('teste').build()}">
+		<form:form servletRelativeAction="${s:mvcUrl('addWorkerToDep').build()}">
 			<table class="table table-striped table-dark table-hover">
                 <tr class="table-dark">
 					<th class="createButton nonHoverable blockLink" colspan="4">
@@ -65,8 +65,8 @@
 				</tr>
                 <tr>
                     <th></th>
-                    <th><fmt:message key='workers.label.nome'></th>
-                    <th><fmt:message key='workers.label.email'></th>
+                    <th><fmt:message key='workers.label.name'/></th>
+                    <th><fmt:message key='workers.label.email'/></th>
                 </tr>
 				<c:forEach items="${workers}" var="worker">
 					<tr>
