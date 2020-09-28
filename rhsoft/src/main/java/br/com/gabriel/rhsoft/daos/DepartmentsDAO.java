@@ -35,9 +35,14 @@ public class DepartmentsDAO {
         return manager.createQuery("select d from Department d where d.id=:id", Department.class).setParameter("id", id).getSingleResult();
     }
 
-    public void deleteById(Integer id){
-        Department departmentToDelete = manager.find(Department.class, id);
-        departmentToDelete.setWorkers(new HashSet<>());
+    public void deleteById(Integer departmentId, Integer companyId){
+        Department departmentToDelete = manager.find(Department.class, departmentId);
+        if(departmentToDelete.getCompany().getId().equals(companyId)){
+            departmentToDelete.setWorkers(new HashSet<>());
+        } else{
+            return;
+        }
+        
         
     }
 

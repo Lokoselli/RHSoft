@@ -44,8 +44,12 @@ public class DepartmentsController {
     //#region CRUD
     @RequestMapping(method = RequestMethod.POST, name = "createDepartment")
     public String createDepartment(Department department, HttpSession session) {
-        
-        department.setCompany(getExposedCompany(session));
+
+        if(getExposedCompany(session) == null){
+            throw new NullPointerException();
+        }
+
+        department.setCompany(getExposedCompany(session));        
         departmentsDAO.persistDepartment(department);
 
         return "redirect:" + urlUpdateExposed(session);
@@ -54,8 +58,8 @@ public class DepartmentsController {
 
     @RequestMapping(name = "removeDepartment", value = "/remove/{id}", method = RequestMethod.POST)
     public String removeDepartment(@PathVariable(value = "id") Integer id,  HttpSession session) {
-
-        departmentsDAO.deleteById(id);
+        Company company = getExposedCompany(session);
+        departmentsDAO.deleteById(id, company.getId());
 
         return "redirect:" + urlUpdateExposed(session);
     }
