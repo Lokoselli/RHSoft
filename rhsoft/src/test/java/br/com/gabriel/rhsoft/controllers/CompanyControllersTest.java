@@ -1,7 +1,5 @@
 package br.com.gabriel.rhsoft.controllers;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +33,7 @@ public class CompanyControllersTest extends ControllerTest {
     private CompanyBuilder companyBuilder = new CompanyBuilder();
     
     @Test
-    public void companyForm() throws Exception {
+    public void testCompanyForm() throws Exception {
         String controllerPath = "/create12345";
         String expectedUrl = webInfPath + "company/companyForm.jsp";
 
@@ -44,7 +42,7 @@ public class CompanyControllersTest extends ControllerTest {
     }
 
     @Test
-    public void createEmpresa() throws Exception {
+    public void testCreateEmpresa() throws Exception {
         String controllerPath = "/";
         String expectedUrl = "/";
 
@@ -56,16 +54,15 @@ public class CompanyControllersTest extends ControllerTest {
     }
 
     @Test
-    public void setExposedCompany() throws Exception {
+    public void testSetExposedCompany() throws Exception {
         Company company =  companyDAOForTesting.persistAndReturnPersisted(companyBuilder.buildWithName("teste").getCompany());
 
         String controllerPath = "/" + company.getId();
-        String expectedUrl = "/";
+        String expectedUrl = webInfPath + "home.jsp";
 
         mockMvc.perform(MockMvcRequestBuilders.get(controllerPath))
-               .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
-
-        assertEquals(company, exposedCompany.getCompany());
+               .andExpect(MockMvcResultMatchers.forwardedUrl(expectedUrl))
+               .andExpect(MockMvcResultMatchers.request().sessionAttribute("exposedCompany", company));
     }
 
     

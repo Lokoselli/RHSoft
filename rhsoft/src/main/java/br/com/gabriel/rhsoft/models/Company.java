@@ -19,7 +19,7 @@ public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int companyId;
+    private Integer companyId;
 
     private String name;
 
@@ -39,7 +39,7 @@ public class Company {
         this.departments = departments;
     }
 
-    public int getId() {
+    public Integer getId() {
         return companyId;
     }
 
