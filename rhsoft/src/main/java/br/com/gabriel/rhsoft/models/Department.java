@@ -91,7 +91,7 @@ public class Department {
 
     @Override
     public String toString() {
-        return name;
+        return name + " " + id;
     }
 
     public Set<Worker> getWorkers() {

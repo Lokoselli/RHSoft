@@ -37,10 +37,12 @@ public class DepartmentsDAO {
 
     public void deleteById(Integer departmentId, Integer companyId){
         Department departmentToDelete = manager.find(Department.class, departmentId);
+
         if(departmentToDelete.getCompany().getId().equals(companyId)){
             departmentToDelete.setWorkers(new HashSet<>());
+            manager.remove(departmentToDelete);
         } else{
-            return;
+            throw new RuntimeException("Not The same Company");
         }
         
         
