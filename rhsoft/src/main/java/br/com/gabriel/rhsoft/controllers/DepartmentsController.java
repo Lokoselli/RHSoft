@@ -98,7 +98,7 @@ public class DepartmentsController {
             throw new NoExposedCompanyException("No Exposed Company");
         }
 
-        ModelAndView modelAndView = new ModelAndView("/departments/detail");
+        ModelAndView modelAndView = new ModelAndView("departments/detail");
         Department department = departmentsDAO.findById(id);
 
         modelAndView.addObject("department", department);
@@ -109,7 +109,12 @@ public class DepartmentsController {
     //#endregion
 
     @RequestMapping(value = "/addWorker", name = "addWorkerToDep")
-    public String addWorker(@RequestParam(value = "selected") Integer[] selected, @RequestParam(value = "departmentId") String departmentId){
+    public String addWorker(@RequestParam(value = "selected") Integer[] selected, @RequestParam(value = "departmentId") String departmentId, HttpSession session){
+
+        if(getExposedCompany(session) == null){
+            throw new NoExposedCompanyException("No Exposed Company");
+        }
+        
         departmentId = departmentId.replace(",", "");
         
         for (Integer workerId : selected) {
@@ -121,14 +126,6 @@ public class DepartmentsController {
         }
 
         return "redirect:/departments/detail?id=" + departmentId ;
-    }
-
-    @RequestMapping(name = "departmentRemoveWorker", value = "/removeWorker")
-    public String removeDepartment(Integer workerId, Integer departmentId){
-
-        departmentsDAO.removeDepartment(workerId, departmentId);
-
-        return "redirect:/departments/detail?id=" + departmentId;
     }
 
     private String urlUpdateExposed(HttpSession session){

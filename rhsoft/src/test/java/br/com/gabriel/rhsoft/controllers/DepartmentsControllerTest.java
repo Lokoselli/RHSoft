@@ -46,42 +46,65 @@ public class DepartmentsControllerTest extends ControllerTest{
     private Company company;
     private MockHttpSession session = new MockHttpSession();
 
+    private String jspUrl(String jspName){
+        return webInfPath + controllerPath + "/" + jspName + ".jsp";
+    }
+
     @Before
     public void createCompany(){
         this.company = companyDAOForTesting.persistAndReturnPersisted(companyBuilder.buildWithName("teste").getCompany());
         session.setAttribute("exposedCompany", company);
     }
 
+    //#region Tests Related to departmentForm
     @Test
-    public void testDepartmentForm() throws Exception {
+    public void testDepartmentFormCall() throws Exception {
         String goTo = "/" + controllerPath + "/form";
-        String expectedUrl = webInfPath + controllerPath + "/departmentsForm.jsp";
+        String expectedUrl = jspUrl("departmentsForm");
         
 
         mockMvc.perform(MockMvcRequestBuilders.get(goTo).session(session))
-               .andExpect(MockMvcResultMatchers.forwardedUrl(expectedUrl));
+			   .andExpect(MockMvcResultMatchers.forwardedUrl(expectedUrl));
+			   
+		try {
+             mockMvc.perform(MockMvcRequestBuilders.post(goTo));
+        } catch (Exception e) {
+            assertTrue(e.getMessage().contains("NoExposedCompanyException"));
+		}
+		
     }
 
+    //#endregion
+
+    //#region Tests Related to departmentEditForm
     @Test
-    public void testDepartmentEditForm() throws Exception {
+    public void testDepartmentEditFormCall() throws Exception {
 
         Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
 
         department = departmentDAOForTesting.persistAndReturnPersisted(department);
 
         String goTo = "/" + controllerPath + "/edit";
-        String expectedUrl =  webInfPath + controllerPath + "/departmentsEditForm.jsp";
+        String expectedUrl = jspUrl("departmentsEditForm");
 
         mockMvc.perform(MockMvcRequestBuilders.post(goTo)
                                               .param("id", "1")
                                               .session(session))
                .andExpect(MockMvcResultMatchers.forwardedUrl(expectedUrl))
-               .andExpect(MockMvcResultMatchers.model().attribute("department", department));
+			   .andExpect(MockMvcResultMatchers.model().attribute("department", department));
+		
+		try {
+             mockMvc.perform(MockMvcRequestBuilders.post(goTo));
+        } catch (Exception e) {
+            assertTrue(e.getMessage().contains("NoExposedCompanyException"));
+        }
 
     }
+    //#endregion
 
+    //#region Tests Related to createDepartment
     @Test
-    public void testCreateDepartmentWithExposedCompany() throws Exception {
+    public void testCreateDepartmentCall() throws Exception {
 
         Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
 
@@ -91,27 +114,20 @@ public class DepartmentsControllerTest extends ControllerTest{
         mockMvc.perform(MockMvcRequestBuilders.post(goTo)
                                               .flashAttr("department", department)
                                               .session(session))
-                .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));    
-    }
-
-    @Test
-    public void testCreateDepartmentWithoutExposed() throws Exception {
-        Department department = departmentBuilder.buildWithEverything("departmentTest", new Company(), new HashSet<>() ).getDepartment();
-
-        String goTo = "/" + controllerPath;
-
-        try {
-             mockMvc.perform(MockMvcRequestBuilders.post(goTo)
-                                              .flashAttr("department", department)
-                                              .session(session));
+				.andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));  
+		
+		try {
+             mockMvc.perform(MockMvcRequestBuilders.post(goTo));
         } catch (Exception e) {
             assertTrue(e.getMessage().contains("NoExposedCompanyException"));
         }
-       
     }
 
+	//#endregion
+
+    //#region Tests Related to removeDepartment
     @Test
-    public void testRemoveDepartmentWithExposedCompany() throws Exception {
+    public void testRemoveDepartmentCall() throws Exception {
 
         Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
 
@@ -123,30 +139,21 @@ public class DepartmentsControllerTest extends ControllerTest{
         mockMvc.perform(MockMvcRequestBuilders.post(goTo)
                                               .param("id", department.getId().toString())
                                               .session(session))
-               .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
-    }
-    
-    @Test
-    public void testRemoveDepartmentWithoutExposed() throws Exception {
-
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
-
-        department = departmentDAOForTesting.persistAndReturnPersisted(department);
-
-        String goTo = "/" + controllerPath + "/remove/" + department.getId();
-
-        try {
-             mockMvc.perform(MockMvcRequestBuilders.post(goTo)
-                                              .param("id", department.getId().toString())
-                                              );
+			   .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
+			   
+		try {
+             mockMvc.perform(MockMvcRequestBuilders.post(goTo));
         } catch (Exception e) {
             assertTrue(e.getMessage().contains("NoExposedCompanyException"));
-        }
-       
+		}
+		
     }
 
+    //#endregion
+
+    //#region Tests Related to editDepartment
     @Test
-    public void testDepartmentEditWithExposed() throws Exception{
+    public void testDepartmentEditCall() throws Exception{
         Integer depId = 1;
 
         Department department = departmentBuilder.buildWithEverything("departmentTest", company , new HashSet<>()).getDepartment();
@@ -159,31 +166,21 @@ public class DepartmentsControllerTest extends ControllerTest{
         mockMvc.perform(MockMvcRequestBuilders.post(goTo)
                                               .flashAttr("department", department)
                                               .session(session))
-               .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
-    }
-
-    @Test
-    public void testDepartmentEditWhitoutExposed() throws Exception{
-
-        Integer depId = 1;
-
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company , new HashSet<>()).getDepartment();
-        department.setId(depId);
-        
-
-        String goTo = "/" + controllerPath + "/editDepartment";
-
-        try{
-        mockMvc.perform(MockMvcRequestBuilders.post(goTo)
-                                              .flashAttr("department", department));
+			   .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
+			   
+		try{
+        mockMvc.perform(MockMvcRequestBuilders.post(goTo));
         }catch(Exception e){
             assertTrue(e.getMessage().contains("NoExposedCompanyException"));
-        }
+		}
+		
+	}
+	
+    //#endregion
 
-    }
-
+    //#region Tests Related to detailDepartment
     @Test
-    public void testDetailDepartmentWithExposed() throws Exception{
+    public void testDetailDepartmentCall() throws Exception{
 
         Integer depId = 1;
 
@@ -198,13 +195,43 @@ public class DepartmentsControllerTest extends ControllerTest{
                                               .param("id", depId.toString())
                                               .session(session))
                .andExpect(MockMvcResultMatchers.forwardedUrl(expectedUrl))
-               .andExpect(MockMvcResultMatchers.model().attribute("department", department));                                  
+			   .andExpect(MockMvcResultMatchers.model().attribute("department", department));
+		
+		try{
+            mockMvc.perform(MockMvcRequestBuilders.get(goTo));
+        }catch(Exception e){
+			assertTrue(e.getMessage().contains("NoExposedCompanyException"));
+		}
 
     }
-
-    private String jspUrl(String jspName){
-        return webInfPath + "/" + controllerPath + "/" + jspName + ".jsp";
-    }
-
     
+    //#endregion
+	
+	//#region Tests Related to addWorker
+
+	@Test
+	public void addWorkerCall() throws Exception {
+
+		Integer depId = 1;
+
+		Department department = new Department();
+		department.setId(depId);
+
+		String goTo = "/" + controllerPath + "/addWorker";
+		String expectedUrl = "/departments/detail?id=" + depId;
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/departments/addWorker")
+                                              .param("selected", "")
+                                              .param("departmentId", depId.toString())
+											  .session(session))
+			   .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
+		
+		try{
+			mockMvc.perform(MockMvcRequestBuilders.get(goTo));
+		}catch(Exception e){
+			assertTrue(e.getMessage().contains("NoExposedCompanyException"));
+		}
+    }
+    
+    //#endregion
 }
