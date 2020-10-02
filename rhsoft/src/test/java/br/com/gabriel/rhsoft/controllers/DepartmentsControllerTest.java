@@ -44,8 +44,6 @@ public class DepartmentsControllerTest extends ControllerTest{
     @Autowired
     WorkerDAOForTesting workerDAOForTesting;
 
-    private String controllerPath = "departments";
-
     private CompanyBuilder companyBuilder;
     private DepartmentBuilder departmentBuilder;
     private WorkerBuilder workerBuilder;
@@ -53,12 +51,10 @@ public class DepartmentsControllerTest extends ControllerTest{
     private Company company;
     private MockHttpSession session;
 
-    private String jspUrl(String jspName){
-        return webInfPath + controllerPath + "/" + jspName + ".jsp";
-    }
-
     @Before
     public void startUp(){
+        super.controllerPath = "departments";
+
         this.workerBuilder = new WorkerBuilder();
         this.departmentBuilder = new DepartmentBuilder();
         this.companyBuilder = new CompanyBuilder();
@@ -247,12 +243,10 @@ public class DepartmentsControllerTest extends ControllerTest{
 			   .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
 		
 		try{
-            System.out.println("asdasd");
             mockMvc.perform(MockMvcRequestBuilders.get(goTo)
                                               .param("selected", ",1")
                                               .param("departmentId", depId.toString()));
 		}catch(Exception e){
-            System.out.println(e);
 			assertTrue(e.getMessage().contains("NoExposedCompanyException"));
 		}
     }
