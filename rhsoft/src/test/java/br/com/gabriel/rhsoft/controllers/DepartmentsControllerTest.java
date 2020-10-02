@@ -46,21 +46,29 @@ public class DepartmentsControllerTest extends ControllerTest{
 
     private String controllerPath = "departments";
 
-    private CompanyBuilder companyBuilder = new CompanyBuilder();
-    private DepartmentBuilder departmentBuilder = new DepartmentBuilder();
-    private WorkerBuilder workerBuilder = new WorkerBuilder();
+    private CompanyBuilder companyBuilder;
+    private DepartmentBuilder departmentBuilder;
+    private WorkerBuilder workerBuilder;
 
     private Company company;
-    private MockHttpSession session = new MockHttpSession();
+    private MockHttpSession session;
 
     private String jspUrl(String jspName){
         return webInfPath + controllerPath + "/" + jspName + ".jsp";
     }
 
     @Before
-    public void createCompany(){
-        this.company = companyDAOForTesting.persistAndReturnPersisted(companyBuilder.buildWithName("teste").getCompany());
+    public void startUp(){
+        this.workerBuilder = new WorkerBuilder();
+        this.departmentBuilder = new DepartmentBuilder();
+        this.companyBuilder = new CompanyBuilder();
+        
+        this.company = companyDAOForTesting.persistAndReturnPersisted(companyBuilder.buildWithName("teste").build());
+
+        this.session = new MockHttpSession();
         session.setAttribute("exposedCompany", company);
+
+        
     }
 
     //#region Tests Related to departmentForm
@@ -87,7 +95,7 @@ public class DepartmentsControllerTest extends ControllerTest{
     @Test
     public void testDepartmentEditFormCall() throws Exception {
 
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
+        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).build();
 
         department = departmentDAOForTesting.persistAndReturnPersisted(department);
 
@@ -113,7 +121,7 @@ public class DepartmentsControllerTest extends ControllerTest{
     @Test
     public void testCreateDepartmentCall() throws Exception {
 
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
+        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).build();
 
         String goTo = "/" + controllerPath;
         String expectedUrl = "/" + company.getId();
@@ -136,7 +144,7 @@ public class DepartmentsControllerTest extends ControllerTest{
     @Test
     public void testRemoveDepartmentCall() throws Exception {
 
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).getDepartment();
+        Department department = departmentBuilder.buildWithEverything("departmentTest", company, new HashSet<>() ).build();
 
         department = departmentDAOForTesting.persistAndReturnPersisted(department);
 
@@ -163,7 +171,7 @@ public class DepartmentsControllerTest extends ControllerTest{
     public void testDepartmentEditCall() throws Exception{
         Integer depId = 1;
 
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company , new HashSet<>()).getDepartment();
+        Department department = departmentBuilder.buildWithEverything("departmentTest", company , new HashSet<>()).build();
         department.setId(depId);
         
 
@@ -191,7 +199,7 @@ public class DepartmentsControllerTest extends ControllerTest{
 
         Integer depId = 1;
 
-        Department department = departmentBuilder.buildWithEverything("departmentTest", company , new HashSet<>()).getDepartment();
+        Department department = departmentBuilder.buildWithEverything("departmentTest", company , new HashSet<>()).build();
         department.setId(depId);
         
 
