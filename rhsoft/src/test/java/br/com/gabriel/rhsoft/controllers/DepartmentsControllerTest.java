@@ -18,17 +18,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.gabriel.rhsoft.builders.CompanyBuilder;
 import br.com.gabriel.rhsoft.builders.DepartmentBuilder;
+import br.com.gabriel.rhsoft.builders.WorkerBuilder;
 import br.com.gabriel.rhsoft.conf.AppWebConfiguration;
 import br.com.gabriel.rhsoft.conf.DataSourceConfigurationTest;
 import br.com.gabriel.rhsoft.conf.JPAConfiguration;
 import br.com.gabriel.rhsoft.models.Company;
 import br.com.gabriel.rhsoft.models.Department;
+import br.com.gabriel.rhsoft.models.Worker;
 import br.com.gabriel.rhsoft.testing_daos.CompanyDAOForTesting;
 import br.com.gabriel.rhsoft.testing_daos.DepartmentDAOForTesting;
+import br.com.gabriel.rhsoft.testing_daos.WorkerDAOForTesting;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JPAConfiguration.class, AppWebConfiguration.class, DataSourceConfigurationTest.class, CompanyBuilder.class, CompanyDAOForTesting.class, DepartmentDAOForTesting.class})
+@ContextConfiguration(classes = {JPAConfiguration.class, AppWebConfiguration.class, DataSourceConfigurationTest.class, CompanyBuilder.class, CompanyDAOForTesting.class, DepartmentDAOForTesting.class, WorkerDAOForTesting.class})
 @ActiveProfiles("test")
 public class DepartmentsControllerTest extends ControllerTest{
 
@@ -38,10 +41,14 @@ public class DepartmentsControllerTest extends ControllerTest{
     @Autowired
     DepartmentDAOForTesting departmentDAOForTesting;
 
+    @Autowired
+    WorkerDAOForTesting workerDAOForTesting;
+
     private String controllerPath = "departments";
 
     private CompanyBuilder companyBuilder = new CompanyBuilder();
     private DepartmentBuilder departmentBuilder = new DepartmentBuilder();
+    private WorkerBuilder workerBuilder = new WorkerBuilder();
 
     private Company company;
     private MockHttpSession session = new MockHttpSession();
@@ -212,23 +219,32 @@ public class DepartmentsControllerTest extends ControllerTest{
 	@Test
 	public void addWorkerCall() throws Exception {
 
-		Integer depId = 1;
+        Integer depId = 1;
+        
+        Worker worker = workerBuilder.createWithEverything(company.getId()).build();
+        worker = workerDAOForTesting.persistAndReturnPersisted(worker);
 
 		Department department = new Department();
 		department.setId(depId);
 
 		String goTo = "/" + controllerPath + "/addWorker";
-		String expectedUrl = "/departments/detail?id=" + depId;
+        String expectedUrl = "/departments/detail?id=" + depId;
+        
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/departments/addWorker")
-                                              .param("selected", "")
+
+        mockMvc.perform(MockMvcRequestBuilders.get(goTo)
+                                              .param("selected", ",1")
                                               .param("departmentId", depId.toString())
 											  .session(session))
 			   .andExpect(MockMvcResultMatchers.redirectedUrl(expectedUrl));
 		
 		try{
-			mockMvc.perform(MockMvcRequestBuilders.get(goTo));
+            System.out.println("asdasd");
+            mockMvc.perform(MockMvcRequestBuilders.get(goTo)
+                                              .param("selected", ",1")
+                                              .param("departmentId", depId.toString()));
 		}catch(Exception e){
+            System.out.println(e);
 			assertTrue(e.getMessage().contains("NoExposedCompanyException"));
 		}
     }
