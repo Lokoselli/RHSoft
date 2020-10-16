@@ -13,10 +13,16 @@ public class ControllerTest {
 
     protected MockMvc mockMvc;
 
+    protected String controllerPath;
+
     protected String webInfPath = "/WEB-INF/views/";
 
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+    }
+
+    protected String jspUrl(String jspName){
+        return webInfPath + controllerPath + "/" + jspName + ".jsp";
     }
 }

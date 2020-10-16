@@ -35,14 +35,14 @@ public class WorkerController {
 
     @RequestMapping(value = "/form", name = "workerForm")
     public ModelAndView workerForm(PreviousPageInfo previousPage) {
-        ModelAndView modelAndView = new ModelAndView("/workers/workerForm");
+        ModelAndView modelAndView = new ModelAndView("workers/workerForm");
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/edit", name = "workerEditForm")
     public ModelAndView workerEditForm(String previousPage,Integer id){
-        ModelAndView modelAndView = new ModelAndView("/workers/workerEditForm");
+        ModelAndView modelAndView = new ModelAndView("workers/workerEditForm");
 
         Worker worker = workersDAO.findById(id);
         modelAndView.addObject("worker", worker);
@@ -55,7 +55,7 @@ public class WorkerController {
     public String updateWorker(Worker worker, String previousPage){
 
         String redirectTo = previousPage.split(",/rhsoft")[1];
-
+        System.out.println(worker);
         workersDAO.editWorker(worker);
 
         return "redirect:" + redirectTo;

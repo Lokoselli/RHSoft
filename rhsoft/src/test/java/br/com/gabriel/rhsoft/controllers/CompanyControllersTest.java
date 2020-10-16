@@ -1,5 +1,6 @@
 package br.com.gabriel.rhsoft.controllers;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class CompanyControllersTest extends ControllerTest {
     ExposedCompany exposedCompany;
 
     private CompanyBuilder companyBuilder = new CompanyBuilder();
+
+    @After
+    public void cleanUp(){
+        this.companyBuilder = new CompanyBuilder();
+    }
     
     @Test
     public void testCompanyForm() throws Exception {
@@ -46,7 +52,7 @@ public class CompanyControllersTest extends ControllerTest {
         String controllerPath = "/";
         String expectedUrl = "/";
 
-        Company first = companyBuilder.buildWithName("teste").getCompany();
+        Company first = companyBuilder.buildWithName("teste").build();
 
         mockMvc.perform(MockMvcRequestBuilders.post(controllerPath)
                                               .flashAttr("company", first))
@@ -55,7 +61,7 @@ public class CompanyControllersTest extends ControllerTest {
 
     @Test
     public void testSetExposedCompany() throws Exception {
-        Company company =  companyDAOForTesting.persistAndReturnPersisted(companyBuilder.buildWithName("teste").getCompany());
+        Company company =  companyDAOForTesting.persistAndReturnPersisted(companyBuilder.buildWithName("teste").build());
 
         String controllerPath = "/" + company.getId();
         String expectedUrl = webInfPath + "home.jsp";

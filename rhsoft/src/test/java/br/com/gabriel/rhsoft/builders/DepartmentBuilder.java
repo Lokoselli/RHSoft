@@ -1,5 +1,6 @@
 package br.com.gabriel.rhsoft.builders;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import br.com.gabriel.rhsoft.models.Company;
@@ -28,6 +29,15 @@ public class DepartmentBuilder {
         return this;
     }
 
+    public DepartmentBuilder buildBasic(Company company){
+
+        this.buildWithName("Teste Department")
+            .buildWithCompany(company)
+            .buildWithWorkers(new HashSet<>());
+
+        return this;
+    }
+
     public DepartmentBuilder buildWithEverything(String name, Company company, Set<Worker> workers){
         
         this.buildWithName(name)
@@ -37,7 +47,7 @@ public class DepartmentBuilder {
             return this;
     }
 
-    public Department getDepartment() {
+    public Department build() {
         return department;
     }
 

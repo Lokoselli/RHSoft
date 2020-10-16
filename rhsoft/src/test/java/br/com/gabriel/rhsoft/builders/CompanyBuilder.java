@@ -7,6 +7,12 @@ public class CompanyBuilder {
 
     private Company company = new Company();
 
+    public CompanyBuilder newCompany(){
+        this.company.setName("teste");
+
+        return this;
+    }
+
     public CompanyBuilder buildWithId(int companyId){
         
         this.company.setId(companyId);
@@ -27,7 +33,7 @@ public class CompanyBuilder {
         return this;
     }
 
-    public Company getCompany() {
+    public Company build() {
         return company;
     }
 
